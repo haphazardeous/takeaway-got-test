@@ -36,7 +36,7 @@ class GameControllerTest {
     private RandomNumberGenerator randomNumberGenerator;
 
     @Test
-    public void givenNoFirstNumber_whenStart_GenerateRandomFirstNumberAndPublishEventAndReturnOK() throws Exception {
+    public void givenNoFirstNumber_whenStart_thenGenerateRandomFirstNumberAndPublishEventAndReturnOK() throws Exception {
         int firstNumber = 56;
         when(randomNumberGenerator.getRandomNumber()).thenReturn(firstNumber);
 
@@ -47,7 +47,7 @@ class GameControllerTest {
     }
 
     @Test
-    public void givenFirstNumber_whenStart_GenerateRandomFirstNumberAndPublishEventAndReturnOK() throws Exception {
+    public void givenFirstNumber_whenStart_ThenUseFirstNumberAndPublishEventAndReturnOK() throws Exception {
         int firstNumber = 56;
 
         mockMvc.perform(get("/start?firstNumber=" + firstNumber))
@@ -57,7 +57,7 @@ class GameControllerTest {
     }
 
     @Test
-    public void givenValidPlayRequest_whenPlay_ThenPublishPlayEventAndReturnOK() throws Exception {
+    public void givenValidPlayRequest_whenPlay_thenPublishPlayEventAndReturnOK() throws Exception {
         PlayRequest playRequest = new PlayRequest(56);
 
         mockMvc.perform(post("/play")
@@ -69,7 +69,7 @@ class GameControllerTest {
     }
 
     @Test
-    public void givenNullPlayRequest_whenPlay_ThenReturnBadRequest() throws Exception {
+    public void givenNullPlayRequest_whenPlay_thenReturnBadRequest() throws Exception {
         mockMvc.perform(post("/play")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(null)))
@@ -79,7 +79,7 @@ class GameControllerTest {
     }
 
     @Test
-    public void givenEmptyPlayRequest_whenPlay_ThenReturnBadRequest() throws Exception {
+    public void givenEmptyPlayRequest_whenPlay_thenReturnBadRequest() throws Exception {
         mockMvc.perform(post("/play")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{}"))
